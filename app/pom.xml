@@ -8,6 +8,9 @@
   </parent>
 
   <artifactId>app</artifactId>
+  <packaging>jar</packaging>
+
+  <name>App</name>
 
   <properties>
     <maven.compiler.source>20</maven.compiler.source>
