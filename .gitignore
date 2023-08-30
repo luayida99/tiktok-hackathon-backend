@@ -2,7 +2,8 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-*.bak
+!**/src/pom.xml.bak
+/pom.xml.bak
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
