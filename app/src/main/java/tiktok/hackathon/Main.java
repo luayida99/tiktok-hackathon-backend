@@ -86,12 +86,12 @@ public class Main implements CommandLineRunner {
     System.out.println("Number of documents in the collection: " + count);
   }
 
-  public void deleteGroceryItem(String id) {
+  private void deleteGroceryItem(String id) {
     repository.deleteById(id);
     System.out.println("Item with id " + id + " deleted...");
   }
 
-  public String getItemDetails(Item item) {
+  private String getItemDetails(Item item) {
     System.out.println(
         "Item Name: "
             + item.getName()
@@ -103,7 +103,7 @@ public class Main implements CommandLineRunner {
     return "";
   }
 
-  public void updateCategoryName(String category) {
+  private void updateCategoryName(String category) {
     String newCategory = "munchies";
 
     List<Item> list = repository.findAll(category);
