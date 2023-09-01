@@ -3,7 +3,9 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 !**/src/pom.xml.bak
+!**/src/main/resources/application.properties
 /pom.xml.bak
+application.properties
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
