@@ -16,6 +16,7 @@
 
   <modules>
     <module>app</module>
+    <module>card-encryption-service</module>
   </modules>
 
   <properties>
