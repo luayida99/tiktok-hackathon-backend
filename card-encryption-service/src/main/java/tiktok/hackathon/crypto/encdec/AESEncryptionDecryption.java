@@ -6,18 +6,20 @@ import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.SecretKey;
+import org.springframework.beans.factory.annotation.Autowired;
 import tiktok.hackathon.crypto.cipherable.Cipherable;
 
 public class AESEncryptionDecryption implements Cipherable {
   private static Cipher cipher;
   private static SecretKey secretKey;
 
+  @Autowired
   public AESEncryptionDecryption() throws NoSuchPaddingException, NoSuchAlgorithmException {
     KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
     keyGenerator.init(128);
 
     this.cipher = Cipher.getInstance("AES");
-    this.secretKey = keyGenerator.getInstance("AES").generateKey();
+    this.secretKey = keyGenerator.generateKey();
   }
 
   @Override

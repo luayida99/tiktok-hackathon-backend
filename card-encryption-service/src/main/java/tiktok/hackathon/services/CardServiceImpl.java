@@ -1,7 +1,5 @@
 package tiktok.hackathon.services;
 
-import java.security.NoSuchAlgorithmException;
-import javax.crypto.NoSuchPaddingException;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import tiktok.hackathon.crypto.cipherable.Cipherable;
@@ -14,10 +12,11 @@ public class CardServiceImpl implements CardService {
   private final Cipherable cipherable;
 
   @Autowired
-  public CardServiceImpl(final @NonNull CardRepository cardRepository)
-      throws NoSuchPaddingException, NoSuchAlgorithmException {
+  public CardServiceImpl(
+      final @NonNull CardRepository cardRepository,
+      final @NonNull AESEncryptionDecryption cipherable) {
     this.cardRepository = cardRepository;
-    this.cipherable = new AESEncryptionDecryption();
+    this.cipherable = cipherable;
   }
 
   // TODO: Implement these methods
