@@ -23,7 +23,7 @@ public class CardController {
     return this.cardService.save(card);
   }
 
-  @GetMapping
+  @GetMapping("/{userId}")
   public List<Card> retrieveAll(@PathVariable String userId) {
     return this.cardService.retrieveAll(userId);
   }
