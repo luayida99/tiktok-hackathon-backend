@@ -1,7 +1,9 @@
 package tiktok.hackathon.crypto.cipherable;
 
-public interface Cipherable {
-  String encrypt(String textToEncrypt) throws Exception;
+import javax.crypto.SecretKey;
 
-  String decrypt(String encryptedText) throws Exception;
+public interface Cipherable {
+  String encrypt(String textToEncrypt, SecretKey secretKey) throws Exception;
+
+  String decrypt(String encryptedText, SecretKey secretKey) throws Exception;
 }

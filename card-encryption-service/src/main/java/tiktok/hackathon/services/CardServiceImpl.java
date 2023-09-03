@@ -6,28 +6,34 @@ import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tiktok.hackathon.crypto.cipherable.Cipherable;
-import tiktok.hackathon.crypto.encdec.AESEncryptionDecryption;
 import tiktok.hackathon.model.Card;
+import tiktok.hackathon.model.CardFactory;
 import tiktok.hackathon.repository.CardRepository;
 
 @Service
 public class CardServiceImpl implements CardService {
   private final CardRepository cardRepository;
   private final Cipherable cipherable;
+  private final CardFactory cardFactory;
 
   @Autowired
   public CardServiceImpl(
       final @NonNull CardRepository cardRepository,
-      final @NonNull AESEncryptionDecryption cipherable) {
+      final @NonNull CardFactory cardFactory,
+      final @NonNull Cipherable cipherable) {
     this.cardRepository = cardRepository;
+    this.cardFactory = cardFactory;
     this.cipherable = cipherable;
   }
 
-  // TODO: Not tested
   @Override
   public String save(Card card) {
     // TODO: Is returning card number necessary?
-    return this.cardRepository.save(card.encrypt(this.cipherable)).getCardNumber();
+    Card completedCard =
+        this.cardFactory.generate(
+            card.getCardNumber(), card.getCvc(), card.getExpiryDate(), card.getUserId());
+    Card encryptedCard = this.cardFactory.encrypt(completedCard, this.cipherable);
+    return this.cardRepository.save(encryptedCard).getCardNumber();
   }
 
   @Override
@@ -35,7 +41,7 @@ public class CardServiceImpl implements CardService {
     List<Card> encryptedCards = this.cardRepository.findCardsByUserId(userId);
 
     return encryptedCards.stream()
-        .map(card -> card.decrypt(this.cipherable))
+        .map(card -> this.cardFactory.decrypt(card, this.cipherable))
         .collect(Collectors.toList());
   }
 }
