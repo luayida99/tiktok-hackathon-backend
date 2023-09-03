@@ -1,10 +1,10 @@
 package tiktok.hackathon.services;
 
+import java.util.List;
 import tiktok.hackathon.model.Card;
 
 public interface CardService {
   String save(Card card);
 
-  // TODO: Figure out method signature
-  String retrieve();
+  List<Card> retrieveAll(String userId);
 }

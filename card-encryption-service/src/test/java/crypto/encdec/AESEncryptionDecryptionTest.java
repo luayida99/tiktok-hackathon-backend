@@ -3,8 +3,6 @@ package crypto.encdec;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
-import java.security.NoSuchAlgorithmException;
-import javax.crypto.NoSuchPaddingException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -16,7 +14,7 @@ public class AESEncryptionDecryptionTest {
   String testString;
 
   @BeforeEach
-  void setUp() throws NoSuchPaddingException, NoSuchAlgorithmException {
+  void setUp() {
     aes1 = new AESEncryptionDecryption();
     aes2 = new AESEncryptionDecryption();
     testString = "0123456789012345";
