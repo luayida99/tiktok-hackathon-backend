@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tiktok.hackathon.model.Card;
 import tiktok.hackathon.services.CardService;
-import tiktok.hackathon.services.CardServiceImpl;
 
 @RestController
 @RequestMapping("/cards")
@@ -14,7 +13,7 @@ public class CardController {
   private final CardService cardService;
 
   @Autowired
-  public CardController(final @NonNull CardServiceImpl cardService) {
+  public CardController(final @NonNull CardService cardService) {
     this.cardService = cardService;
   }
 
