@@ -27,8 +27,6 @@ public class CardController {
 
   @GetMapping("/{userId}")
   public List<Card> retrieveAll(@PathVariable String userId) {
-    System.out.println(userId);
-    System.out.println("TEST");
     return this.cardService.retrieveAll(userId);
   }
 }

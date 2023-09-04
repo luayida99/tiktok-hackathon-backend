@@ -1,13 +1,6 @@
 package tiktok.hackathon;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.util.List;
-import java.util.Objects;
-
-import com.google.auth.oauth2.GoogleCredentials;
-import com.google.firebase.FirebaseApp;
-import com.google.firebase.FirebaseOptions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;

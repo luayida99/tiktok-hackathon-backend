@@ -22,7 +22,6 @@ public class Card {
   private String secretKeyString;
 
   public SecretKey stringToKey() {
-    System.out.println(this.secretKeyString);
     byte[] keyBytes = Base64.getDecoder().decode(this.secretKeyString);
     return new SecretKeySpec(keyBytes, "AES");
   }

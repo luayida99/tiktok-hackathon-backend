@@ -17,6 +17,7 @@ public class CardFactory {
   @Autowired
   public CardFactory(final @NonNull KeyGenerator keyGenerator, final @NonNull Converter converter) {
     this.keyGenerator = keyGenerator;
+    this.converter = converter;
   }
 
   public Card generate(String cardNumber, String cvc, YearMonth expiryDate, String userId) {
@@ -40,7 +41,6 @@ public class CardFactory {
 
   @SneakyThrows
   public Card decrypt(Card card, Cipherable cipherable) {
-    System.out.println(card.getSecretKeyString());
     return new Card(
         cipherable.decrypt(card.getCardNumber(), card.stringToKey()),
         cipherable.decrypt(card.getCvc(), card.stringToKey()),

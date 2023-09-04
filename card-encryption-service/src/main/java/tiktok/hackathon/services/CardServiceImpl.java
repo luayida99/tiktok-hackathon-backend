@@ -33,7 +33,7 @@ public class CardServiceImpl implements CardService {
     // TODO: Is returning card number necessary?
     Card completedCard = this.cardFactory.generate(cardNumber, cvc, expiryDate, userId);
     Card encryptedCard = this.cardFactory.encrypt(completedCard, this.cipherable);
-    System.out.println(encryptedCard);
+
     return this.cardRepository.save(encryptedCard).getCardNumber();
   }
 
