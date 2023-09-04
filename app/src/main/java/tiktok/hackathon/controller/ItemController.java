@@ -20,16 +20,16 @@ import java.util.logging.Logger;
 public class ItemController {
     @Autowired
     private ItemService itemService;
+    private Logger logger = Logger.getLogger("");
 
     @GetMapping
-    public String find(@RequestParam String name){
-
+    public String find(@RequestParam String name){ //http://localhost:8080/items?name=cheese
+        logger.info(name);
         return itemService.findByName(name);
     }
 
     @GetMapping("/test")
     public String test(){
-        Logger logger = Logger.getLogger("");
         logger.info("testing");
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String uid = authentication.getName();
