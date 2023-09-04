@@ -16,6 +16,7 @@
 
   <modules>
     <module>app</module>
+    <module>ai-service</module>
   </modules>
 
   <properties>
