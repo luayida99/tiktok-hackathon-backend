@@ -19,7 +19,8 @@ public class CardController {
 
   @PostMapping
   public String save(@RequestBody Card card) {
-    return this.cardService.save(card);
+    return this.cardService.save(
+        card.getCardNumber(), card.getCvc(), card.getExpiryDate(), card.getUserId());
   }
 
   @GetMapping("/{userId}")

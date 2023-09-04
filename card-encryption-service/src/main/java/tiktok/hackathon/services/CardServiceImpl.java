@@ -1,5 +1,6 @@
 package tiktok.hackathon.services;
 
+import java.time.YearMonth;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.NonNull;
@@ -27,11 +28,9 @@ public class CardServiceImpl implements CardService {
   }
 
   @Override
-  public String save(Card card) {
+  public String save(String cardNumber, String cvc, YearMonth expiryDate, String userId) {
     // TODO: Is returning card number necessary?
-    Card completedCard =
-        this.cardFactory.generate(
-            card.getCardNumber(), card.getCvc(), card.getExpiryDate(), card.getUserId());
+    Card completedCard = this.cardFactory.generate(cardNumber, cvc, expiryDate, userId);
     Card encryptedCard = this.cardFactory.encrypt(completedCard, this.cipherable);
     return this.cardRepository.save(encryptedCard).getCardNumber();
   }
