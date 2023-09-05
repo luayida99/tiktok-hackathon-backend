@@ -6,6 +6,7 @@ import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tiktok.hackathon.model.Card;
+import tiktok.hackathon.model.CardView;
 import tiktok.hackathon.services.CardService;
 
 @RestController
@@ -26,7 +27,7 @@ public class CardController {
   }
 
   @GetMapping("/{userId}")
-  public List<Card> retrieveAll(@PathVariable String userId) {
+  public List<CardView> retrieveAll(@PathVariable String userId) {
     return this.cardService.retrieveAll(userId);
   }
 }

@@ -25,4 +25,8 @@ public class Card {
     byte[] keyBytes = Base64.getDecoder().decode(this.secretKeyString);
     return new SecretKeySpec(keyBytes, "AES");
   }
+
+  public CardView getView() {
+    return new CardView(this.cardNumber, this.cvc, this.expiryDate);
+  }
 }
