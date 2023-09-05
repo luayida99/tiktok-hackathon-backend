@@ -9,7 +9,4 @@ import tiktok.hackathon.model.Transaction;
 public interface TransactionRepository extends MongoRepository<Transaction, String> {
   @Query("{cardId:?0}")
   List<Transaction> findTransactionsByCard(String cardId);
-
-  @Query("{transactionId:?0}")
-  Transaction findTransactionById(String transactionId);
 }
