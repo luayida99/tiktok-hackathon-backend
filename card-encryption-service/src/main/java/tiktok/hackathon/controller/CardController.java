@@ -23,7 +23,12 @@ public class CardController {
   @PostMapping
   public String save(@RequestBody Card card) {
     return this.cardService.save(
-        card.getCardNumber(), card.getCvc(), card.getExpiryDate(), card.getUserId());
+        card.getCardNumber(),
+        card.getCvc(),
+        card.getExpiryYear(),
+        card.getExpiryMonth(),
+        card.getUserId(),
+        card.getBank());
   }
 
   @GetMapping("/{userId}")

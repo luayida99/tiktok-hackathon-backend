@@ -1,6 +1,5 @@
 package tiktok.hackathon.model;
 
-import java.time.YearMonth;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -11,5 +10,7 @@ import lombok.Setter;
 public class CardView {
   private String cardNumber;
   private String cvc;
-  private YearMonth expiryDate;
+  private int expiryYear;
+  private int expiryMonth;
+  private String bank;
 }

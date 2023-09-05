@@ -1,6 +1,5 @@
 package tiktok.hackathon.model;
 
-import java.time.YearMonth;
 import java.util.Base64;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -17,8 +16,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Card {
   @Id private String cardNumber;
   private String cvc;
-  private YearMonth expiryDate;
+  private int expiryYear;
+  private int expiryMonth;
   private String userId;
+  private String bank;
   private String secretKeyString;
 
   public SecretKey stringToKey() {
@@ -27,6 +28,6 @@ public class Card {
   }
 
   public CardView getView() {
-    return new CardView(this.cardNumber, this.cvc, this.expiryDate);
+    return new CardView(this.cardNumber, this.cvc, this.expiryYear, this.expiryMonth, this.bank);
   }
 }

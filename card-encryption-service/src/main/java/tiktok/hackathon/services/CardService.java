@@ -1,11 +1,11 @@
 package tiktok.hackathon.services;
 
-import java.time.YearMonth;
 import java.util.List;
 import tiktok.hackathon.model.CardView;
 
 public interface CardService {
-  String save(String cardNumber, String cvc, YearMonth expiryDate, String userId);
+  String save(
+      String cardNumber, String cvc, int expiryYear, int expiryMonth, String userId, String bank);
 
   List<CardView> retrieveAll(String userId);
 }
