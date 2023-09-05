@@ -16,6 +16,7 @@
 
   <modules>
     <module>app</module>
+    <module>transaction-service</module>
   </modules>
 
   <properties>
