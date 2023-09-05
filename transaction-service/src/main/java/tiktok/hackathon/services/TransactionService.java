@@ -1,7 +1,13 @@
 package tiktok.hackathon.services;
 
+import java.util.Date;
+import java.util.List;
 import tiktok.hackathon.model.Transaction;
 
 public interface TransactionService {
-  public void add(Transaction transaction);
+  void add(String cardId, int amount, Date transactionDateTime);
+
+  List<Transaction> retrieveTransactionsByCard(String cardId);
+
+  Transaction findById(String transactionId) throws RuntimeException;
 }
