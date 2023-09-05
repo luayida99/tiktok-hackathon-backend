@@ -7,6 +7,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document("card")
@@ -14,7 +15,11 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @AllArgsConstructor
 public class Card {
-  @Id private String cardNumber;
+  @Id private String id;
+
+  @Indexed(unique = true)
+  private String cardNumber;
+
   private String cvc;
   private int expiryYear;
   private int expiryMonth;
@@ -28,6 +33,7 @@ public class Card {
   }
 
   public CardView getView() {
-    return new CardView(this.cardNumber, this.cvc, this.expiryYear, this.expiryMonth, this.bank);
+    return new CardView(
+        this.id, this.cardNumber, this.cvc, this.expiryYear, this.expiryMonth, this.bank);
   }
 }

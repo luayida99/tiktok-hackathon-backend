@@ -1,6 +1,7 @@
 package tiktok.hackathon.services;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,6 @@ public class CardServiceImpl implements CardService {
   @Override
   public void save(
       String cardNumber, String cvc, int expiryYear, int expiryMonth, String userId, String bank) {
-    // TODO: Is returning card number necessary?
     Card completedCard =
         this.cardFactory.generate(cardNumber, cvc, expiryYear, expiryMonth, userId, bank);
     Card encryptedCard = this.cardFactory.encrypt(completedCard, this.cipherable);
@@ -46,5 +46,16 @@ public class CardServiceImpl implements CardService {
         .map(card -> this.cardFactory.decrypt(card, this.cipherable))
         .map(Card::getView)
         .collect(Collectors.toList());
+  }
+
+  @Override
+  public CardView findById(String cardId) throws RuntimeException {
+    Optional<Card> card = this.cardRepository.findById(cardId);
+    if (card.isPresent()) {
+      Card decryptedCard = this.cardFactory.decrypt(card.get(), this.cipherable);
+      return decryptedCard.getView();
+    } else {
+      throw new RuntimeException();
+    }
   }
 }

@@ -22,6 +22,7 @@ public class CardFactory {
   public Card generate(
       String cardNumber, String cvc, int expiryYear, int expiryMonth, String userId, String bank) {
     return new Card(
+        null,
         cardNumber,
         cvc,
         expiryYear,
@@ -34,6 +35,7 @@ public class CardFactory {
   @SneakyThrows
   public Card encrypt(Card card, Cipherable cipherable) {
     return new Card(
+        card.getId(),
         cipherable.encrypt(card.getCardNumber(), card.stringToKey()),
         cipherable.encrypt(card.getCvc(), card.stringToKey()),
         card.getExpiryYear(),
@@ -46,6 +48,7 @@ public class CardFactory {
   @SneakyThrows
   public Card decrypt(Card card, Cipherable cipherable) {
     return new Card(
+        card.getId(),
         cipherable.decrypt(card.getCardNumber(), card.stringToKey()),
         cipherable.decrypt(card.getCvc(), card.stringToKey()),
         card.getExpiryYear(),

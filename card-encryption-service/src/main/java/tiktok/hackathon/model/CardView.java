@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CardView {
+  private String id;
   private String cardNumber;
   private String cvc;
   private int expiryYear;

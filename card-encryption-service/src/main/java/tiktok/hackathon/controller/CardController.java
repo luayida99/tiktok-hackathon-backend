@@ -31,8 +31,13 @@ public class CardController {
         card.getBank());
   }
 
-  @GetMapping("/{userId}")
+  @GetMapping("user/{userId}")
   public List<CardView> retrieveAll(@PathVariable String userId) {
     return this.cardService.retrieveAll(userId);
+  }
+
+  @GetMapping("card/{cardId}")
+  public CardView retrieveCard(@PathVariable String cardId) {
+    return this.cardService.findById(cardId);
   }
 }

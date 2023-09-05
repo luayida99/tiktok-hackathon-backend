@@ -8,4 +8,6 @@ public interface CardService {
       String cardNumber, String cvc, int expiryYear, int expiryMonth, String userId, String bank);
 
   List<CardView> retrieveAll(String userId);
+
+  CardView findById(String cardId);
 }
