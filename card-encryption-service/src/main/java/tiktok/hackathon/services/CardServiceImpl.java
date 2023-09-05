@@ -28,14 +28,14 @@ public class CardServiceImpl implements CardService {
   }
 
   @Override
-  public String save(
+  public void save(
       String cardNumber, String cvc, int expiryYear, int expiryMonth, String userId, String bank) {
     // TODO: Is returning card number necessary?
     Card completedCard =
         this.cardFactory.generate(cardNumber, cvc, expiryYear, expiryMonth, userId, bank);
     Card encryptedCard = this.cardFactory.encrypt(completedCard, this.cipherable);
 
-    return this.cardRepository.save(encryptedCard).getCardNumber();
+    this.cardRepository.save(encryptedCard).getCardNumber();
   }
 
   @Override
