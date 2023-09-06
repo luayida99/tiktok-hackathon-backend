@@ -34,14 +34,15 @@ public class CardServiceImpl implements CardService {
     Card completedCard =
         this.cardFactory.generate(cardNumber, cvc, expiryYear, expiryMonth, userId, bank);
     Card encryptedCard = this.cardFactory.encrypt(completedCard, this.cipherable);
-
     this.cardRepository.save(encryptedCard).getCardNumber();
   }
 
   @Override
-  public List<CardView> retrieveAll(String userId) {
+  public List<CardView> retrieveAll(String userId) throws RuntimeException {
     List<Card> encryptedCards = this.cardRepository.findCardsByUserId(userId);
-
+    if (encryptedCards.isEmpty()) {
+      throw new RuntimeException("No cards for user id %s".formatted(userId));
+    }
     return encryptedCards.stream()
         .map(card -> this.cardFactory.decrypt(card, this.cipherable))
         .map(Card::getView)
@@ -51,11 +52,11 @@ public class CardServiceImpl implements CardService {
   @Override
   public CardView findById(String cardId) throws RuntimeException {
     Optional<Card> card = this.cardRepository.findById(cardId);
-    if (card.isPresent()) {
-      Card decryptedCard = this.cardFactory.decrypt(card.get(), this.cipherable);
-      return decryptedCard.getView();
-    } else {
-      throw new RuntimeException();
-    }
+    return this.cardFactory
+        .decrypt(
+            card.orElseThrow(
+                () -> new RuntimeException("Card with id %s cannot be found".formatted(cardId))),
+            this.cipherable)
+        .getView();
   }
 }
