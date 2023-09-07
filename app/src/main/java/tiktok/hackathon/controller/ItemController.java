@@ -14,11 +14,6 @@ import tiktok.hackathon.services.ItemService;
 public class ItemController {
   @Autowired private ItemService itemService;
 
-  @GetMapping
-  public String find(@RequestParam String name) {
-    return itemService.findByName(name);
-  }
-
   private Logger logger = Logger.getLogger("");
 
   @GetMapping
