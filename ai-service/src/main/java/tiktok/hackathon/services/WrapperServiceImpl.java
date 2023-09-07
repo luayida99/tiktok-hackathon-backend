@@ -1,13 +1,23 @@
 package tiktok.hackathon.services;
 
+import static org.springframework.http.HttpHeaders.CONTENT_TYPE;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
+import tiktok.hackathon.request.ModelRequestBody;
+import tiktok.hackathon.request.ModelReturnBody;
 import tiktok.hackathon.risk.Risk;
 import tiktok.hackathon.rules.BusinessRule;
 
+@Getter
+@Setter
 @Service
 public class WrapperServiceImpl implements WrapperService {
   private final WebClient client;
@@ -22,9 +32,23 @@ public class WrapperServiceImpl implements WrapperService {
   }
 
   @Override
-  public Risk assess() {
-    // TODO: Call AI model here - predictedRisk is dummy value
-    float predictedRisk = 0;
+  public Risk assess() throws ExecutionException, InterruptedException {
+    // TODO: Model request body and take in transaction
+    ModelRequestBody modelRequestBody =
+        new ModelRequestBody("test", 100f, 100f, 100f, 10f, 10f, 20, 4, 3, 2);
+
+    ModelReturnBody modelReturnBody =
+        this.client
+            .post()
+            .uri("/predict")
+            .header(CONTENT_TYPE, APPLICATION_JSON_VALUE)
+            .bodyValue(modelRequestBody)
+            .retrieve()
+            .bodyToMono(ModelReturnBody.class)
+            .block();
+
+    float predictedRisk = modelReturnBody.getFraudPr();
+    System.out.println(predictedRisk);
 
     this.initBusinessRules();
     for (BusinessRule rule : this.businessRules) {

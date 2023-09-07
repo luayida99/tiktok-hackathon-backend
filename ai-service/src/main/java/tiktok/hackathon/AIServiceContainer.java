@@ -14,6 +14,9 @@ import reactor.netty.http.client.HttpClient;
 
 @Configuration
 public class AIServiceContainer {
+  // TODO: Update this
+  private static final String AI_MODEL_URL = "http://localhost:5000";
+
   @Bean
   @NonNull
   WebClient webClient() {
@@ -27,6 +30,9 @@ public class AIServiceContainer {
                     conn.addHandlerLast(new ReadTimeoutHandler(5000, TimeUnit.MILLISECONDS))
                         .addHandlerLast(new WriteTimeoutHandler(5000, TimeUnit.MILLISECONDS)));
 
-    return WebClient.builder().clientConnector(new ReactorClientHttpConnector(httpClient)).build();
+    return WebClient.builder()
+        .baseUrl(AI_MODEL_URL)
+        .clientConnector(new ReactorClientHttpConnector(httpClient))
+        .build();
   }
 }
