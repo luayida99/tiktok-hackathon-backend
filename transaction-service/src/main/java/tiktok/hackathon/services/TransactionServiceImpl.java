@@ -5,6 +5,7 @@ import java.util.List;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tiktok.hackathon.exception.TransactionNotFoundException;
 import tiktok.hackathon.model.Transaction;
 import tiktok.hackathon.model.TransactionFactory;
 import tiktok.hackathon.repository.TransactionRepository;
@@ -34,12 +35,12 @@ public class TransactionServiceImpl implements TransactionService {
   }
 
   @Override
-  public Transaction findById(String transactionId) throws RuntimeException {
+  public Transaction findById(String transactionId) throws TransactionNotFoundException {
     return this.repository
         .findById(transactionId)
         .orElseThrow(
             () ->
-                new RuntimeException(
+                new TransactionNotFoundException(
                     "Transaction with %s cannot be found".formatted(transactionId)));
   }
 }

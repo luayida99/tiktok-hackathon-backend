@@ -2,6 +2,7 @@ package tiktok.hackathon.services;
 
 import java.util.Date;
 import java.util.List;
+import tiktok.hackathon.exception.TransactionNotFoundException;
 import tiktok.hackathon.model.Transaction;
 
 public interface TransactionService {
@@ -9,5 +10,5 @@ public interface TransactionService {
 
   List<Transaction> retrieveTransactionsByCard(String cardId);
 
-  Transaction findById(String transactionId) throws RuntimeException;
+  Transaction findById(String transactionId) throws TransactionNotFoundException;
 }
