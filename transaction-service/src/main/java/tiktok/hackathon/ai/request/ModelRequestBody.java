@@ -1,4 +1,4 @@
-package tiktok.hackathon.request;
+package tiktok.hackathon.ai.request;
 
 import lombok.*;
 

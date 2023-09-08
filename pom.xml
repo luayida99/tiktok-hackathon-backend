@@ -16,7 +16,6 @@
 
   <modules>
     <module>app</module>
-    <module>ai-service</module>
     <module>card-encryption-service</module>
     <module>reports-service</module>
     <module>transaction-service</module>
