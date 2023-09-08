@@ -6,6 +6,7 @@ target/
 !**/src/main/resources/application.properties
 /pom.xml.bak
 application.properties
+serviceAccountKey.json
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
