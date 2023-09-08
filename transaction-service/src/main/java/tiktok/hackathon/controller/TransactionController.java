@@ -27,7 +27,7 @@ public class TransactionController {
         try {
 
 
-            this.service.add(transaction.getCardId(), transaction.getAmount(), transaction.getTransactionDateTime(), transaction.getCategory(), transaction.getLat(), transaction.getLon(), transaction.getMerch_lat(), transaction.getMerch_lon(), transaction.getAge(), transaction.getName(), transaction.getNumber());
+            this.service.add(transaction.getCardId(), transaction.getAmount(), transaction.getTransactionDateTime(), transaction.getCategory(), transaction.getLat(), transaction.getLon(), transaction.getMerch_lat(), transaction.getMerch_lon(), transaction.getDob(), transaction.getName(), transaction.getNumber());
 
             return ResponseEntity.ok().build();
         } catch (RuntimeException e) {

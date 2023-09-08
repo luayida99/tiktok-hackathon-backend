@@ -45,7 +45,7 @@ public class TransactionServiceImpl implements TransactionService {
       String lon,
       String merch_lat,
       String merch_lon,
-      String age,
+      String dob,
       String name,
       String number) {
     Transaction completedTransaction =
@@ -58,7 +58,7 @@ public class TransactionServiceImpl implements TransactionService {
             Float.parseFloat(lon),
             Float.parseFloat(merch_lat),
             Float.parseFloat(merch_lon),
-            Integer.parseInt(age),
+            converter.stringToDate(dob),
             name,
             number);
     this.repository.save(completedTransaction);

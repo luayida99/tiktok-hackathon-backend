@@ -20,7 +20,7 @@ public class TransactionDto {
   private String lon;
   private String merch_lat;
   private String merch_lon;
-  private String age;
+  private String dob;
   private String name;
   private String number;
 }
