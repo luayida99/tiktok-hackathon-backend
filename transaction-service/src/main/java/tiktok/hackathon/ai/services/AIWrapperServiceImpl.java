@@ -48,7 +48,7 @@ public class AIWrapperServiceImpl implements AIWrapperService {
 
     this.initBusinessRules();
     for (BusinessRule rule : this.businessRules) {
-      predictedRisk = rule.apply(predictedRisk);
+      predictedRisk = rule.apply(transaction, predictedRisk);
     }
 
     // TODO: Dummy range values, update
