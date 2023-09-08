@@ -33,6 +33,12 @@ public class Card {
 
   public CardView getView() {
     return new CardView(
-        this.cardNumber, this.cvc, this.expiryYear, this.expiryMonth, this.bank, this.cardId);
+        this.cardNumber,
+        this.cvc,
+        this.expiryYear,
+        this.expiryMonth,
+        this.bank,
+        this.cardId,
+        this.scheme);
   }
 }
