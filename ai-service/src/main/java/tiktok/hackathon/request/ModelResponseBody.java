@@ -8,5 +8,4 @@ import lombok.*;
 @ToString
 public class ModelResponseBody {
   private float fraudPr;
-  private String test;
 }

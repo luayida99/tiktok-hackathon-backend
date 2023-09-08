@@ -20,7 +20,6 @@ public class WrapperServiceImpl implements WrapperService {
   private final RestTemplate restTemplate;
   private final ArrayList<BusinessRule> businessRules;
 
-  private static final float epsilon = 0.00001f;
   // TODO: Change this
   private static final String AI_BASE_URL = "http://localhost:5000";
 
@@ -42,11 +41,9 @@ public class WrapperServiceImpl implements WrapperService {
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
     HttpEntity<ModelRequestBody> request = new HttpEntity<>(modelRequestBody, headers);
-    System.out.println(request.getBody().toString());
     ResponseEntity<ModelResponseBody> response =
         this.restTemplate.postForEntity(AI_BASE_URL + "/predict", request, ModelResponseBody.class);
     float predictedRisk = response.getBody().getFraudPr();
-    System.out.println(response);
 
     this.initBusinessRules();
     for (BusinessRule rule : this.businessRules) {
@@ -65,8 +62,7 @@ public class WrapperServiceImpl implements WrapperService {
     // TODO: Add business rules to apply here
   }
 
-  // TODO: Check how we wanna do range, epsilon comparison
   private boolean withinRange(float value, float lower, float upper) {
-    return value >= lower - epsilon && value < upper + epsilon;
+    return value >= lower && value < upper;
   }
 }
