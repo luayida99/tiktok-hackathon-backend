@@ -8,7 +8,7 @@ public class AmountThresholdRule implements BusinessRule {
     @Override
     public float apply(Transaction transaction, float prevPrediction) {
         if (transaction.getAmount() > threshold) {
-            return Math.max(prevPrediction + 0.1f, 1.0f);
+            return Math.min(prevPrediction + 0.1f, 1.0f);
         }
         return prevPrediction;
     }
