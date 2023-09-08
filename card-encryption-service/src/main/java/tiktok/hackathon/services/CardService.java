@@ -12,7 +12,8 @@ public interface CardService {
       int expiryMonth,
       String userId,
       String bank,
-      LocalDateTime dateOfBirth);
+      LocalDateTime dateOfBirth,
+      String scheme);
 
   List<CardView> retrieveAll(String userId);
 }

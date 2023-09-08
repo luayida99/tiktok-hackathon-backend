@@ -27,7 +27,8 @@ public class CardFactory {
       int expiryMonth,
       String userId,
       String bank,
-      LocalDateTime dateOfBirth) {
+      LocalDateTime dateOfBirth,
+      String scheme) {
     // null to let Mongo generate id
     return new Card(
         null,
@@ -38,7 +39,8 @@ public class CardFactory {
         userId,
         bank,
         converter.keyToString(this.keyGenerator.generateKey()),
-        dateOfBirth);
+        dateOfBirth,
+        scheme);
   }
 
   @SneakyThrows
@@ -52,7 +54,8 @@ public class CardFactory {
         card.getUserId(),
         card.getBank(),
         card.getSecretKeyString(),
-        card.getDateOfBirth());
+        card.getDateOfBirth(),
+        card.getScheme());
   }
 
   @SneakyThrows
@@ -66,6 +69,7 @@ public class CardFactory {
         card.getUserId(),
         card.getBank(),
         card.getSecretKeyString(),
-        card.getDateOfBirth());
+        card.getDateOfBirth(),
+        card.getScheme());
   }
 }

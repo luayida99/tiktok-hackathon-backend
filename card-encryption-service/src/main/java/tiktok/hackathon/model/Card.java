@@ -24,6 +24,7 @@ public class Card {
   private String bank;
   private String secretKeyString;
   private LocalDateTime dateOfBirth;
+  private String scheme;
 
   public SecretKey stringToKey() {
     byte[] keyBytes = Base64.getDecoder().decode(this.secretKeyString);

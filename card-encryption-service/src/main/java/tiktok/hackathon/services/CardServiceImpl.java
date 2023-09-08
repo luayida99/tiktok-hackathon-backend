@@ -36,10 +36,11 @@ public class CardServiceImpl implements CardService {
       int expiryMonth,
       String userId,
       String bank,
-      LocalDateTime dateOfBirth) {
+      LocalDateTime dateOfBirth,
+      String scheme) {
     Card completedCard =
         this.cardFactory.generate(
-            cardNumber, cvc, expiryYear, expiryMonth, userId, bank, dateOfBirth);
+            cardNumber, cvc, expiryYear, expiryMonth, userId, bank, dateOfBirth, scheme);
     Card encryptedCard = this.cardFactory.encrypt(completedCard, this.cipherable);
 
     this.cardRepository.save(encryptedCard).getCardNumber();
