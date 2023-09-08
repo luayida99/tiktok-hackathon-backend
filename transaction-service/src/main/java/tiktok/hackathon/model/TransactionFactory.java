@@ -1,7 +1,6 @@
 package tiktok.hackathon.model;
 
 import java.time.LocalDateTime;
-import java.util.Date;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -31,6 +30,7 @@ public class TransactionFactory {
         merch_lon,
         dateOfBirth,
         name,
-        number, null);
+        number,
+        null);
   }
 }

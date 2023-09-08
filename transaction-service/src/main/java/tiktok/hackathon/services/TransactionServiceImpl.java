@@ -4,13 +4,13 @@ import java.util.List;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tiktok.hackathon.Commons;
 import tiktok.hackathon.ai.risk.Risk;
 import tiktok.hackathon.ai.services.AIWrapperService;
 import tiktok.hackathon.exception.TransactionNotFoundException;
 import tiktok.hackathon.model.Transaction;
 import tiktok.hackathon.model.TransactionFactory;
 import tiktok.hackathon.repository.TransactionRepository;
-import tiktok.hackathon.Commons;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
@@ -77,11 +77,14 @@ public class TransactionServiceImpl implements TransactionService {
 
   @Override
   public void updateRisk(String transactionId, Risk risk) throws TransactionNotFoundException {
-    Transaction tx = this.repository.findById(transactionId).orElseThrow(
-            () -> new TransactionNotFoundException(
-                    "Transaction with %s cannot be found".formatted(transactionId))
+    Transaction tx =
+        this.repository
+            .findById(transactionId)
+            .orElseThrow(
+                () ->
+                    new TransactionNotFoundException(
+                        "Transaction with %s cannot be found".formatted(transactionId)));
 
-    );
     tx.setRisk(risk);
     this.repository.save(tx);
   }
