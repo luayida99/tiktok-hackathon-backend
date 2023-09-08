@@ -1,5 +1,8 @@
 package tiktok.hackathon.ai.services;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.Period;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -37,7 +40,16 @@ public class AIWrapperServiceImpl implements AIWrapperService {
     // "merch_long": -94.445245, "age": 70, "hour": 17, "day": 6, "month": 7 }
     ModelRequestBody modelRequestBody =
         new ModelRequestBody(
-            "travel", 300000, 40.1362f, -95.2138f, 40.591103f, -94.445245f, 70, 17, 6, 7);
+            transaction.getCategory(),
+            transaction.getAmount(),
+            transaction.getLat(),
+            transaction.getLon(),
+            transaction.getMerch_lat(),
+            transaction.getMerch_lon(),
+            this.computeCurrentAge(transaction.getDateOfBirth()),
+            transaction.getTransactionDateTime().getHour(),
+            transaction.getTransactionDateTime().getDayOfMonth(),
+            transaction.getTransactionDateTime().getMonthValue());
 
     HttpHeaders headers = new HttpHeaders();
     headers.setContentType(MediaType.APPLICATION_JSON);
@@ -65,5 +77,9 @@ public class AIWrapperServiceImpl implements AIWrapperService {
 
   private boolean withinRange(float value, float lower, float upper) {
     return value >= lower && value < upper;
+  }
+
+  private int computeCurrentAge(LocalDateTime dateOfBirth) {
+    return Period.between(dateOfBirth.toLocalDate(), LocalDate.now()).getYears();
   }
 }

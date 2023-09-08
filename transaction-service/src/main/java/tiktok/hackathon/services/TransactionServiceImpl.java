@@ -1,10 +1,11 @@
 package tiktok.hackathon.services;
 
-import java.util.Date;
 import java.util.List;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tiktok.hackathon.Commons;
+import tiktok.hackathon.ai.risk.Risk;
 import tiktok.hackathon.ai.services.AIWrapperService;
 import tiktok.hackathon.exception.TransactionNotFoundException;
 import tiktok.hackathon.model.Transaction;
@@ -27,10 +28,35 @@ public class TransactionServiceImpl implements TransactionService {
     this.aiWrapperService = aiWrapperService;
   }
 
-  // TODO: Update this method for better logging to FE?
+  // TODO: Update how FE passes dateOfBirth, replace age
   @Override
-  public void add(String cardId, int amount, Date transactionDateTime) {
-    Transaction completedTransaction = this.factory.generate(cardId, amount, transactionDateTime);
+  public void add(
+      String cardId,
+      String amount,
+      String transactionDateTime,
+      String category,
+      String lat,
+      String lon,
+      String merch_lat,
+      String merch_lon,
+      String dob,
+      String name,
+      String number) {
+    Transaction completedTransaction =
+        this.factory.generate(
+            cardId,
+            Integer.parseInt(amount),
+            Commons.stringToDateTime(transactionDateTime),
+            category,
+            Float.parseFloat(lat),
+            Float.parseFloat(lon),
+            Float.parseFloat(merch_lat),
+            Float.parseFloat(merch_lon),
+            Commons.stringToDate(dob),
+            name,
+            number);
+    Risk risk = aiWrapperService.assess(completedTransaction);
+    completedTransaction.setRisk(risk);
     this.repository.save(completedTransaction);
   }
 
@@ -47,5 +73,19 @@ public class TransactionServiceImpl implements TransactionService {
             () ->
                 new TransactionNotFoundException(
                     "Transaction with %s cannot be found".formatted(transactionId)));
+  }
+
+  @Override
+  public void updateRisk(String transactionId, Risk risk) throws TransactionNotFoundException {
+    Transaction tx =
+        this.repository
+            .findById(transactionId)
+            .orElseThrow(
+                () ->
+                    new TransactionNotFoundException(
+                        "Transaction with %s cannot be found".formatted(transactionId)));
+
+    tx.setRisk(risk);
+    this.repository.save(tx);
   }
 }

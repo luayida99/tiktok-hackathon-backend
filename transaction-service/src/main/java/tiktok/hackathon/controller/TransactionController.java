@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tiktok.hackathon.exception.TransactionNotFoundException;
 import tiktok.hackathon.model.Transaction;
+import tiktok.hackathon.model.TransactionDto;
 import tiktok.hackathon.services.TransactionService;
 
 @RestController
@@ -20,10 +21,21 @@ public class TransactionController {
   }
 
   @PostMapping
-  public ResponseEntity<Void> add(@RequestBody Transaction transaction) {
+  public ResponseEntity<Void> add(@RequestBody TransactionDto transaction) {
     try {
+
       this.service.add(
-          transaction.getCardId(), transaction.getAmount(), transaction.getTransactionDateTime());
+          transaction.getCardId(),
+          transaction.getAmount(),
+          transaction.getTransactionDateTime(),
+          transaction.getCategory(),
+          transaction.getLat(),
+          transaction.getLon(),
+          transaction.getMerch_lat(),
+          transaction.getMerch_lon(),
+          transaction.getDob(),
+          transaction.getName(),
+          transaction.getNumber());
 
       return ResponseEntity.ok().build();
     } catch (RuntimeException e) {

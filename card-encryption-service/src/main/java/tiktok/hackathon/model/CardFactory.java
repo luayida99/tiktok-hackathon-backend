@@ -1,5 +1,6 @@
 package tiktok.hackathon.model;
 
+import java.time.LocalDateTime;
 import javax.crypto.KeyGenerator;
 import lombok.NonNull;
 import lombok.SneakyThrows;
@@ -20,7 +21,13 @@ public class CardFactory {
   }
 
   public Card generate(
-      String cardNumber, String cvc, int expiryYear, int expiryMonth, String userId, String bank) {
+      String cardNumber,
+      String cvc,
+      int expiryYear,
+      int expiryMonth,
+      String userId,
+      String bank,
+      LocalDateTime dateOfBirth) {
     return new Card(
         cardNumber,
         cvc,
@@ -28,7 +35,8 @@ public class CardFactory {
         expiryMonth,
         userId,
         bank,
-        converter.keyToString(this.keyGenerator.generateKey()));
+        converter.keyToString(this.keyGenerator.generateKey()),
+        dateOfBirth);
   }
 
   @SneakyThrows
@@ -40,7 +48,8 @@ public class CardFactory {
         card.getExpiryMonth(),
         card.getUserId(),
         card.getBank(),
-        card.getSecretKeyString());
+        card.getSecretKeyString(),
+        card.getDateOfBirth());
   }
 
   @SneakyThrows
@@ -52,6 +61,7 @@ public class CardFactory {
         card.getExpiryMonth(),
         card.getUserId(),
         card.getBank(),
-        card.getSecretKeyString());
+        card.getSecretKeyString(),
+        card.getDateOfBirth());
   }
 }
