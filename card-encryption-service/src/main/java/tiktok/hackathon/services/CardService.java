@@ -1,6 +1,6 @@
 package tiktok.hackathon.services;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import tiktok.hackathon.model.CardView;
 
@@ -12,7 +12,7 @@ public interface CardService {
       int expiryMonth,
       String userId,
       String bank,
-      LocalDateTime dateOfBirth,
+      LocalDate dateOfBirth,
       String scheme);
 
   List<CardView> retrieveAll(String userId);

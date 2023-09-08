@@ -1,6 +1,6 @@
 package tiktok.hackathon.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import javax.crypto.KeyGenerator;
 import lombok.NonNull;
 import lombok.SneakyThrows;
@@ -27,7 +27,7 @@ public class CardFactory {
       int expiryMonth,
       String userId,
       String bank,
-      LocalDateTime dateOfBirth,
+      LocalDate dateOfBirth,
       String scheme) {
     // null to let Mongo generate id
     return new Card(

@@ -1,5 +1,6 @@
 package tiktok.hackathon.model;
 
+import java.time.LocalDate;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,4 +16,5 @@ public class CardView {
   private String bank;
   private String cardId;
   private String scheme;
+  private LocalDate dateOfBirth;
 }
