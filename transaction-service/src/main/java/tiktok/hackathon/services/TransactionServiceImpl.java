@@ -28,7 +28,6 @@ public class TransactionServiceImpl implements TransactionService {
     this.aiWrapperService = aiWrapperService;
   }
 
-  // TODO: Update how FE passes dateOfBirth, replace age
   @Override
   public void add(
       String cardId,
@@ -55,13 +54,9 @@ public class TransactionServiceImpl implements TransactionService {
             Commons.stringToDate(dob),
             name,
             number);
-    System.out.println("2");
     Risk risk = aiWrapperService.assess(completedTransaction);
-    System.out.println("3");
     completedTransaction.setRisk(risk);
-    System.out.println("4");
     this.repository.save(completedTransaction);
-    System.out.println("5");
   }
 
   @Override
