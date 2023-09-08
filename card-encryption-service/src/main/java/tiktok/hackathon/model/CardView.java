@@ -13,4 +13,5 @@ public class CardView {
   private int expiryYear;
   private int expiryMonth;
   private String bank;
+  private String cardId;
 }
