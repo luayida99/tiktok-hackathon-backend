@@ -1,15 +1,10 @@
-package tiktok.hackathon.utils;
+package tiktok.hackathon;
 
-import org.springframework.stereotype.Service;
-
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Period;
 import java.time.format.DateTimeFormatter;
 
-@Service
-public class Converter {
-    public LocalDateTime stringToDate(String dateTimeString){
+public final class Commons {
+    public static LocalDateTime stringToDate(String dateTimeString){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
         LocalDateTime dateTime = LocalDateTime.parse(dateTimeString, formatter);
@@ -17,7 +12,7 @@ public class Converter {
         return dateTime;
     }
 
-    public LocalDateTime stringToDateTime(String dateTimeString){
+    public static LocalDateTime stringToDateTime(String dateTimeString){
         // TODO: Implement converter for tx datetime
         return null;
     }

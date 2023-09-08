@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
+import tiktok.hackathon.ai.risk.Risk;
 
 import java.time.LocalDateTime;
 
@@ -25,4 +26,5 @@ public class Transaction {
   private LocalDateTime dateOfBirth;
   private String name;
   private String number;
+  private Risk risk;
 }

@@ -31,6 +31,6 @@ public class TransactionFactory {
         merch_lon,
         dateOfBirth,
         name,
-        number);
+        number, null);
   }
 }

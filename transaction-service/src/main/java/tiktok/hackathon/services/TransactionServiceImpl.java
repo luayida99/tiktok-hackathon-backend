@@ -1,36 +1,30 @@
 package tiktok.hackathon.services;
 
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.List;
 import lombok.NonNull;
-import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import tiktok.hackathon.ai.services.AIWrapperService;
+import tiktok.hackathon.ai.risk.Risk;
 import tiktok.hackathon.ai.services.AIWrapperService;
 import tiktok.hackathon.exception.TransactionNotFoundException;
 import tiktok.hackathon.model.Transaction;
 import tiktok.hackathon.model.TransactionFactory;
 import tiktok.hackathon.repository.TransactionRepository;
-import tiktok.hackathon.utils.Converter;
+import tiktok.hackathon.Commons;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
   private final TransactionRepository repository;
   private final TransactionFactory factory;
-  private final Converter converter;
   private final AIWrapperService aiWrapperService;
 
   @Autowired
   public TransactionServiceImpl(
       final @NonNull TransactionRepository repository,
       final @NonNull TransactionFactory factory,
-      final @NonNull Converter converter,
       final @NonNull AIWrapperService aiWrapperService) {
     this.repository = repository;
     this.factory = factory;
-    this.converter = converter;
     this.aiWrapperService = aiWrapperService;
   }
 
@@ -52,15 +46,17 @@ public class TransactionServiceImpl implements TransactionService {
         this.factory.generate(
             cardId,
             Integer.parseInt(amount),
-            converter.stringToDate(transactionDateTime),
+            Commons.stringToDateTime(transactionDateTime),
             category,
             Float.parseFloat(lat),
             Float.parseFloat(lon),
             Float.parseFloat(merch_lat),
             Float.parseFloat(merch_lon),
-            converter.stringToDate(dob),
+            Commons.stringToDate(dob),
             name,
             number);
+    Risk risk = aiWrapperService.assess(completedTransaction);
+    completedTransaction.setRisk(risk);
     this.repository.save(completedTransaction);
   }
 
@@ -77,5 +73,16 @@ public class TransactionServiceImpl implements TransactionService {
             () ->
                 new TransactionNotFoundException(
                     "Transaction with %s cannot be found".formatted(transactionId)));
+  }
+
+  @Override
+  public void updateRisk(String transactionId, Risk risk) throws TransactionNotFoundException {
+    Transaction tx = this.repository.findById(transactionId).orElseThrow(
+            () -> new TransactionNotFoundException(
+                    "Transaction with %s cannot be found".formatted(transactionId))
+
+    );
+    tx.setRisk(risk);
+    this.repository.save(tx);
   }
 }
