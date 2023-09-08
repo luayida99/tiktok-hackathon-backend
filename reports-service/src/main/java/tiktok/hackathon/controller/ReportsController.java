@@ -1,12 +1,19 @@
 package tiktok.hackathon.controller;
 
-import org.springframework.messaging.handler.annotation.DestinationVariable;
+import com.google.auth.oauth2.GoogleCredentials;
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.FirebaseOptions;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthException;
+import com.google.firebase.auth.FirebaseToken;
+import java.io.IOException;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestParam;
-import tiktok.hackathon.messages.Report;
+import tiktok.hackathon.messages.ReportDto;
 import tiktok.hackathon.messages.ReportResponse;
 
 @Controller
@@ -14,18 +21,43 @@ public class ReportsController {
   // TODO: Implement these methods to do the report and report responses
   //  messageMapping receives subscriptions
   //  sendTo broadcasts to subscribers
+  FirebaseApp firebaseApp = null;
+  FirebaseToken decodedToken = null;
 
-  @MessageMapping("users/{userId}")
-  @SendTo("/banks/{bank}")
-  public Report sendReport(@DestinationVariable String userId, @DestinationVariable String bank) {
-    return new Report();
-  }
+  @MessageMapping("report")
+  @SendTo("/topic/banks")
+  public ReportResponse sendReport(@Payload ReportDto report) {
+    System.out.println("checking" + report);
+    System.out.println(report.getToken());
+    System.out.println(report.getBank());
+    System.out.println(report.getDescription());
 
-  @MessageMapping("/banks/{bank}")
-  @SendTo("users/{userId}")
-  public ReportResponse returnReport(
-      @DestinationVariable String bank, @DestinationVariable String userId) {
-    return new ReportResponse();
+    FirebaseOptions options = null;
+    String uid = null;
+    try {
+      options =
+          new FirebaseOptions.Builder()
+              .setCredentials(
+                  GoogleCredentials.fromStream(
+                      new ClassPathResource("serviceAccountKey.json").getInputStream()))
+              .build();
+    } catch (IOException e) {
+      throw new RuntimeException(e);
+    }
+
+    if (FirebaseApp.getApps().isEmpty()) {
+      firebaseApp = FirebaseApp.initializeApp(options);
+    } else {
+      firebaseApp = FirebaseApp.getInstance();
+    }
+
+    try {
+      decodedToken = FirebaseAuth.getInstance(firebaseApp).verifyIdToken(report.getToken());
+      uid = decodedToken.getUid();
+    } catch (FirebaseAuthException e) {
+      throw new RuntimeException(e);
+    }
+    return new ReportResponse(uid, report.getDescription(), report.getBank(), "test");
   }
 
   @MessageMapping("/sendMessage")

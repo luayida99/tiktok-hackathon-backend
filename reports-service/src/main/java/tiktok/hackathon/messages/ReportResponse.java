@@ -8,5 +8,8 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class ReportResponse {
-  // TODO: Define report response
+  private String userId;
+  private String bank;
+  private String description;
+  private String txId;
 }

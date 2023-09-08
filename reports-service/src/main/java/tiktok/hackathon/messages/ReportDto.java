@@ -7,6 +7,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-public class Report {
-  // TODO: Define report
+public class ReportDto {
+  private String token;
+  private String bank;
+  private String description;
+  //    private String txId;
 }
