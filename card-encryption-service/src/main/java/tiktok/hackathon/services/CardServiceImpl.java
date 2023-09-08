@@ -37,7 +37,6 @@ public class CardServiceImpl implements CardService {
       String userId,
       String bank,
       LocalDateTime dateOfBirth) {
-    // TODO: Is returning card number necessary?
     Card completedCard =
         this.cardFactory.generate(
             cardNumber, cvc, expiryYear, expiryMonth, userId, bank, dateOfBirth);

@@ -18,9 +18,6 @@ import tiktok.hackathon.messages.ReportResponse;
 
 @Controller
 public class ReportsController {
-  // TODO: Implement these methods to do the report and report responses
-  //  messageMapping receives subscriptions
-  //  sendTo broadcasts to subscribers
   FirebaseApp firebaseApp = null;
   FirebaseToken decodedToken = null;
 

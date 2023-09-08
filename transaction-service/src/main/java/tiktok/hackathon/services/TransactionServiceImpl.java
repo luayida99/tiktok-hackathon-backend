@@ -28,7 +28,6 @@ public class TransactionServiceImpl implements TransactionService {
     this.aiWrapperService = aiWrapperService;
   }
 
-  // TODO: Update how FE passes dateOfBirth, replace age
   @Override
   public void add(
       String cardId,
@@ -45,7 +44,7 @@ public class TransactionServiceImpl implements TransactionService {
     Transaction completedTransaction =
         this.factory.generate(
             cardId,
-            Integer.parseInt(amount),
+            Float.parseFloat(amount),
             Commons.stringToDateTime(transactionDateTime),
             category,
             Float.parseFloat(lat),

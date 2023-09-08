@@ -35,9 +35,6 @@ public class AIWrapperServiceImpl implements AIWrapperService {
 
   @Override
   public Risk assess(Transaction transaction) {
-    // TODO: Model request body and take in transaction
-    // { "category": "travel", "amt": 300, "lat": 40.1362, "long": -95.2138, "merch_lat": 40.591103,
-    // "merch_long": -94.445245, "age": 70, "hour": 17, "day": 6, "month": 7 }
     ModelRequestBody modelRequestBody =
         new ModelRequestBody(
             transaction.getCategory(),
