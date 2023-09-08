@@ -5,6 +5,7 @@ import java.util.List;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import tiktok.hackathon.ai.services.AIWrapperService;
 import tiktok.hackathon.exception.TransactionNotFoundException;
 import tiktok.hackathon.model.Transaction;
 import tiktok.hackathon.model.TransactionFactory;
@@ -14,12 +15,16 @@ import tiktok.hackathon.repository.TransactionRepository;
 public class TransactionServiceImpl implements TransactionService {
   private final TransactionRepository repository;
   private final TransactionFactory factory;
+  private final AIWrapperService aiWrapperService;
 
   @Autowired
   public TransactionServiceImpl(
-      final @NonNull TransactionRepository repository, final @NonNull TransactionFactory factory) {
+      final @NonNull TransactionRepository repository,
+      final @NonNull TransactionFactory factory,
+      final @NonNull AIWrapperService aiWrapperService) {
     this.repository = repository;
     this.factory = factory;
+    this.aiWrapperService = aiWrapperService;
   }
 
   // TODO: Update this method for better logging to FE?

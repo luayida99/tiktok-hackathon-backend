@@ -1,4 +1,4 @@
-package tiktok.hackathon.risk;
+package tiktok.hackathon.ai.risk;
 
 import lombok.Getter;
 

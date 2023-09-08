@@ -1,4 +1,4 @@
-package tiktok.hackathon.services;
+package tiktok.hackathon.ai.services;
 
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,13 +10,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import tiktok.hackathon.request.ModelRequestBody;
-import tiktok.hackathon.request.ModelResponseBody;
-import tiktok.hackathon.risk.Risk;
-import tiktok.hackathon.rules.BusinessRule;
+import tiktok.hackathon.ai.request.ModelRequestBody;
+import tiktok.hackathon.ai.request.ModelResponseBody;
+import tiktok.hackathon.ai.risk.Risk;
+import tiktok.hackathon.ai.rules.BusinessRule;
+import tiktok.hackathon.model.Transaction;
 
 @Service
-public class WrapperServiceImpl implements WrapperService {
+public class AIWrapperServiceImpl implements AIWrapperService {
   private final RestTemplate restTemplate;
   private final ArrayList<BusinessRule> businessRules;
 
@@ -24,13 +25,13 @@ public class WrapperServiceImpl implements WrapperService {
   private static final String AI_BASE_URL = "http://localhost:5000";
 
   @Autowired
-  public WrapperServiceImpl(final @NonNull RestTemplateBuilder builder) {
+  public AIWrapperServiceImpl(final @NonNull RestTemplateBuilder builder) {
     this.restTemplate = builder.build();
     this.businessRules = new ArrayList<>();
   }
 
   @Override
-  public Risk assess() {
+  public Risk assess(Transaction transaction) {
     // TODO: Model request body and take in transaction
     // { "category": "travel", "amt": 300, "lat": 40.1362, "long": -95.2138, "merch_lat": 40.591103,
     // "merch_long": -94.445245, "age": 70, "hour": 17, "day": 6, "month": 7 }
