@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 public class TransactionFactory {
   public Transaction generate(
       String cardId,
-      int amount,
+      float amount,
       LocalDateTime transactionDateTime,
       String category,
       float lat,

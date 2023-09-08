@@ -45,7 +45,7 @@ public class TransactionServiceImpl implements TransactionService {
     Transaction completedTransaction =
         this.factory.generate(
             cardId,
-            Integer.parseInt(amount),
+            Float.parseFloat(amount),
             Commons.stringToDateTime(transactionDateTime),
             category,
             Float.parseFloat(lat),
@@ -55,9 +55,13 @@ public class TransactionServiceImpl implements TransactionService {
             Commons.stringToDate(dob),
             name,
             number);
+    System.out.println("2");
     Risk risk = aiWrapperService.assess(completedTransaction);
+    System.out.println("3");
     completedTransaction.setRisk(risk);
+    System.out.println("4");
     this.repository.save(completedTransaction);
+    System.out.println("5");
   }
 
   @Override
