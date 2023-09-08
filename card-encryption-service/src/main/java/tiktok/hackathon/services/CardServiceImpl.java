@@ -57,9 +57,4 @@ public class CardServiceImpl implements CardService {
         .map(Card::getView)
         .collect(Collectors.toList());
   }
-
-  // TODO: Call this method on the fly when AI service needs it for accurate age
-  private int computeCurrentAge(LocalDateTime dateOfBirth) {
-    return Period.between(dateOfBirth.toLocalDate(), LocalDate.now()).getYears();
-  }
 }

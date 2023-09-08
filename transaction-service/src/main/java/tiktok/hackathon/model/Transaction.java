@@ -13,17 +13,16 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 public class Transaction {
-    @Id
-    private String transactionId;
-    private String cardId;
-    private int amount;
-    private LocalDateTime transactionDateTime;
-    private String category;
-    private float lat;
-    private float lon;
-    private float merch_lat;
-    private float merch_lon;
-    private int age;
-    private String name;
-    private String number;
+  @Id private String transactionId;
+  private String cardId;
+  private float amount;
+  private LocalDateTime transactionDateTime;
+  private String category;
+  private float lat;
+  private float lon;
+  private float merch_lat;
+  private float merch_lon;
+  private LocalDateTime dateOfBirth;
+  private String name;
+  private String number;
 }

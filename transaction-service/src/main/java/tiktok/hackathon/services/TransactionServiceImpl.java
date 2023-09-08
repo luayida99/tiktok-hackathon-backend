@@ -24,17 +24,43 @@ public class TransactionServiceImpl implements TransactionService {
 
   @Autowired
   public TransactionServiceImpl(
-      final @NonNull TransactionRepository repository, final @NonNull TransactionFactory factory, final @NonNull Converter converter,final @NonNull AIWrapperService aiWrapperService) {
+      final @NonNull TransactionRepository repository,
+      final @NonNull TransactionFactory factory,
+      final @NonNull Converter converter,
+      final @NonNull AIWrapperService aiWrapperService) {
     this.repository = repository;
     this.factory = factory;
     this.converter = converter;
     this.aiWrapperService = aiWrapperService;
   }
 
-  // TODO: Update this method for better logging to FE?
+  // TODO: Update how FE passes dateOfBirth, replace age
   @Override
-  public void add(String cardId, String amount, String transactionDateTime, String category, String lat, String lon, String merch_lat, String merch_lon, String age, String name, String number) {
-    Transaction completedTransaction = this.factory.generate( cardId, Integer.parseInt(amount), converter.stringToDate(transactionDateTime),category, Float.parseFloat(lat), Float.parseFloat(lon), Float.parseFloat(merch_lat), Float.parseFloat(merch_lon), Integer.parseInt(age), name, number);
+  public void add(
+      String cardId,
+      String amount,
+      String transactionDateTime,
+      String category,
+      String lat,
+      String lon,
+      String merch_lat,
+      String merch_lon,
+      String age,
+      String name,
+      String number) {
+    Transaction completedTransaction =
+        this.factory.generate(
+            cardId,
+            Integer.parseInt(amount),
+            converter.stringToDate(transactionDateTime),
+            category,
+            Float.parseFloat(lat),
+            Float.parseFloat(lon),
+            Float.parseFloat(merch_lat),
+            Float.parseFloat(merch_lon),
+            Integer.parseInt(age),
+            name,
+            number);
     this.repository.save(completedTransaction);
   }
 
