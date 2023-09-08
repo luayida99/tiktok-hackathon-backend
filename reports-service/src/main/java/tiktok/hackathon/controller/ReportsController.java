@@ -27,11 +27,6 @@ public class ReportsController {
   @MessageMapping("report")
   @SendTo("/topic/banks")
   public ReportResponse sendReport(@Payload ReportDto report) {
-    System.out.println("checking" + report);
-    System.out.println(report.getToken());
-    System.out.println(report.getBank());
-    System.out.println(report.getDescription());
-
     FirebaseOptions options = null;
     String uid = null;
     try {
@@ -63,7 +58,6 @@ public class ReportsController {
   @MessageMapping("/sendMessage")
   @SendTo("/topic/private")
   public String sendMessage(@Payload String msg, @RequestParam String user) {
-    System.out.println("testing" + user);
     return msg + user;
   }
 }

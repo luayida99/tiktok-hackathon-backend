@@ -26,7 +26,6 @@ public class UserHandshakeHandler extends DefaultHandshakeHandler {
   @Override
   protected Principal determineUser(
       ServerHttpRequest request, WebSocketHandler wsHandler, Map<String, Object> attributes) {
-    System.out.println(request.getURI());
     URI uri = request.getURI();
     UriComponents uriComponents = UriComponentsBuilder.fromUri(uri).build();
     String token = uriComponents.getQueryParams().getFirst("token");
