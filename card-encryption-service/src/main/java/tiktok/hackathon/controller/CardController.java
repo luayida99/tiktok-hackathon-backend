@@ -29,7 +29,8 @@ public class CardController {
         card.getExpiryMonth(),
         card.getUserId(),
         card.getBank(),
-        card.getDateOfBirth());
+        card.getDateOfBirth(),
+        card.getScheme());
   }
 
   @GetMapping("/{userId}")
