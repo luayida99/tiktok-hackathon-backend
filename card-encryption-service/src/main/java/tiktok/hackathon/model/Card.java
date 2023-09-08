@@ -15,7 +15,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Setter
 @AllArgsConstructor
 public class Card {
-  @Id private String cardNumber;
+  @Id private String cardId;
+  private String cardNumber;
   private String cvc;
   private int expiryYear;
   private int expiryMonth;
@@ -30,6 +31,7 @@ public class Card {
   }
 
   public CardView getView() {
-    return new CardView(this.cardNumber, this.cvc, this.expiryYear, this.expiryMonth, this.bank);
+    return new CardView(
+        this.cardNumber, this.cvc, this.expiryYear, this.expiryMonth, this.bank, this.cardId);
   }
 }

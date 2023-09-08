@@ -28,7 +28,9 @@ public class CardFactory {
       String userId,
       String bank,
       LocalDateTime dateOfBirth) {
+    // null to let Mongo generate id
     return new Card(
+        null,
         cardNumber,
         cvc,
         expiryYear,
@@ -42,6 +44,7 @@ public class CardFactory {
   @SneakyThrows
   public Card encrypt(Card card, Cipherable cipherable) {
     return new Card(
+        card.getCardId(),
         cipherable.encrypt(card.getCardNumber(), card.stringToKey()),
         cipherable.encrypt(card.getCvc(), card.stringToKey()),
         card.getExpiryYear(),
@@ -55,6 +58,7 @@ public class CardFactory {
   @SneakyThrows
   public Card decrypt(Card card, Cipherable cipherable) {
     return new Card(
+        card.getCardId(),
         cipherable.decrypt(card.getCardNumber(), card.stringToKey()),
         cipherable.decrypt(card.getCvc(), card.stringToKey()),
         card.getExpiryYear(),
