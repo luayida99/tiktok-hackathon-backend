@@ -7,5 +7,6 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class ModelResponseBody {
-  private float FraudPr;
+  private float fraudPr;
+  private String test;
 }
