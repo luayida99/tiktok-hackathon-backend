@@ -5,11 +5,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public final class Commons {
-  public static LocalDateTime stringToDate(String dateTimeString) {
+  public static LocalDate stringToDate(String dateTimeString) {
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    LocalDateTime dateTime = LocalDate.parse(dateTimeString, formatter).atStartOfDay();
 
-    return dateTime;
+    return LocalDate.parse(dateTimeString, formatter);
   }
 
   public static LocalDateTime stringToDateTime(String dateTimeString) {
