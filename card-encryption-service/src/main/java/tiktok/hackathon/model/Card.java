@@ -1,5 +1,6 @@
 package tiktok.hackathon.model;
 
+import java.time.LocalDateTime;
 import java.util.Base64;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
@@ -21,6 +22,7 @@ public class Card {
   private String userId;
   private String bank;
   private String secretKeyString;
+  private LocalDateTime dateOfBirth;
 
   public SecretKey stringToKey() {
     byte[] keyBytes = Base64.getDecoder().decode(this.secretKeyString);
