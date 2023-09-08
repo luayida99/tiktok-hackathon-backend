@@ -11,23 +11,26 @@ import tiktok.hackathon.exception.TransactionNotFoundException;
 import tiktok.hackathon.model.Transaction;
 import tiktok.hackathon.model.TransactionFactory;
 import tiktok.hackathon.repository.TransactionRepository;
+import tiktok.hackathon.utils.Converter;
 
 @Service
 public class TransactionServiceImpl implements TransactionService {
   private final TransactionRepository repository;
   private final TransactionFactory factory;
+  private final Converter converter;
 
   @Autowired
   public TransactionServiceImpl(
-      final @NonNull TransactionRepository repository, final @NonNull TransactionFactory factory) {
+      final @NonNull TransactionRepository repository, final @NonNull TransactionFactory factory, final @NonNull Converter converter) {
     this.repository = repository;
     this.factory = factory;
+    this.converter = converter;
   }
 
   // TODO: Update this method for better logging to FE?
   @Override
-  public void add(String cardId, int amount, LocalDateTime transactionDateTime) {
-    Transaction completedTransaction = this.factory.generate(cardId, amount, transactionDateTime);
+  public void add(String cardId, String amount, String transactionDateTime, String category, String lat, String lon, String merch_lat, String merch_lon, String age, String name, String number) {
+    Transaction completedTransaction = this.factory.generate( cardId, Integer.parseInt(amount), converter.stringToDate(transactionDateTime),category, Float.parseFloat(lat), Float.parseFloat(lon), Float.parseFloat(merch_lat), Float.parseFloat(merch_lon), Integer.parseInt(age), name, number);
     this.repository.save(completedTransaction);
   }
 
