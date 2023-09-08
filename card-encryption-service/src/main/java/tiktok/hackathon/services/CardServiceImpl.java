@@ -1,5 +1,6 @@
 package tiktok.hackathon.services;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.List;
@@ -59,6 +60,6 @@ public class CardServiceImpl implements CardService {
 
   // TODO: Call this method on the fly when AI service needs it for accurate age
   private int computeCurrentAge(LocalDateTime dateOfBirth) {
-    return Period.between(dateOfBirth.toLocalDate(), LocalDateTime.now().toLocalDate()).getYears();
+    return Period.between(dateOfBirth.toLocalDate(), LocalDate.now()).getYears();
   }
 }
