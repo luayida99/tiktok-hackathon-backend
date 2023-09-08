@@ -13,7 +13,8 @@ public final class Commons {
   }
 
   public static LocalDateTime stringToDateTime(String dateTimeString) {
-    // TODO: Implement converter for tx datetime
-    return null;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+    return LocalDateTime.parse(dateTimeString, formatter);
   }
 }
