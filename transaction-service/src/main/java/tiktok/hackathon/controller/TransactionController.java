@@ -1,5 +1,6 @@
 package tiktok.hackathon.controller;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import lombok.NonNull;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +24,7 @@ public class TransactionController {
   public ResponseEntity<Void> add(@RequestBody Transaction transaction) {
     try {
       this.service.add(
-          transaction.getCardId(), transaction.getAmount(), transaction.getTransactionDateTime());
+          transaction.getCardId(), transaction.getAmount(), LocalDateTime.now());
 
       return ResponseEntity.ok().build();
     } catch (RuntimeException e) {

@@ -1,5 +1,6 @@
 package tiktok.hackathon.model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -15,6 +16,6 @@ public class Transaction {
   @Id private String transactionId;
   private String cardId;
   private int amount;
-  private Date transactionDateTime;
+  private LocalDateTime transactionDateTime;
   // TODO: AI model fields
 }

@@ -1,8 +1,10 @@
 package tiktok.hackathon.services;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 import lombok.NonNull;
+import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tiktok.hackathon.exception.TransactionNotFoundException;
@@ -24,7 +26,7 @@ public class TransactionServiceImpl implements TransactionService {
 
   // TODO: Update this method for better logging to FE?
   @Override
-  public void add(String cardId, int amount, Date transactionDateTime) {
+  public void add(String cardId, int amount, LocalDateTime transactionDateTime) {
     Transaction completedTransaction = this.factory.generate(cardId, amount, transactionDateTime);
     this.repository.save(completedTransaction);
   }
