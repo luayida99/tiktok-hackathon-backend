@@ -30,7 +30,7 @@ public class ReportsController {
 
   @MessageMapping("/sendMessage")
   @SendTo("/topic/private")
-  public String sendMessage(@Payload String msg,  @RequestParam String user){
+  public String sendMessage(@Payload String msg, @RequestParam String user) {
     System.out.println("testing" + user);
     return msg + user;
   }

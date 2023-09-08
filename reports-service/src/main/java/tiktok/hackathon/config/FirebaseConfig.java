@@ -3,34 +3,47 @@ package tiktok.hackathon.config;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.FirebaseOptions;
-import com.google.firebase.auth.FirebaseAuth;
-import jakarta.annotation.PostConstruct;
+import java.io.IOException;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.stereotype.Service;
-
-import java.io.IOException;
-import java.io.InputStream;
 
 @Configuration
 public class FirebaseConfig {
 
-    @Primary
-    @Bean
-    public FirebaseApp getfirebaseApp() throws IOException {
-        FirebaseOptions options = FirebaseOptions.builder().setCredentials( GoogleCredentials
-                .fromStream(new ClassPathResource("serviceAccountKey.json").getInputStream())).build();
+  //    @Bean
+  //    public FirebaseApp getFirebaseApp (){
+  //        FirebaseOptions options = null;
+  //        try {
+  //            options =
+  //                    FirebaseOptions.builder()
+  //                            .setCredentials(
+  //                                    GoogleCredentials.fromStream(
+  //                                            new
+  // ClassPathResource("serviceAccountKey.json").getInputStream()))
+  //                            .build();
+  //        } catch (IOException e) {
+  //            throw new RuntimeException(e);
+  //        }
+  //
+  //        return FirebaseApp.initializeApp(options);
+  //    }
 
-        if (FirebaseApp.getApps().isEmpty()) {
-            FirebaseApp.initializeApp(options);
-        }
-        return FirebaseApp.getInstance();
-    }
+  @Bean
+  public FirebaseApp createFireBaseApp() throws IOException {
 
-    @Bean
-    public FirebaseAuth getAuth() throws IOException {
-        return FirebaseAuth.getInstance(getfirebaseApp());
-    }
+    FirebaseOptions options =
+        new FirebaseOptions.Builder()
+            .setCredentials(
+                GoogleCredentials.fromStream(
+                    new ClassPathResource("serviceAccountKey.json").getInputStream()))
+            .build();
+
+    // Add loggers
+    System.out.println("Firebase config initialized");
+
+    FirebaseApp app = FirebaseApp.initializeApp(options);
+    System.out.println(app);
+    return app;
+  }
 }
