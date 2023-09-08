@@ -1,5 +1,6 @@
 package tiktok.hackathon.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +23,7 @@ public class Transaction {
   private float lon;
   private float merch_lat;
   private float merch_lon;
-  private LocalDateTime dateOfBirth;
+  private LocalDate dateOfBirth;
   private String name;
   private String number;
   private Risk risk;

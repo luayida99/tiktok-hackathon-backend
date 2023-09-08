@@ -1,6 +1,6 @@
 package tiktok.hackathon.services;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.NonNull;
@@ -36,7 +36,7 @@ public class CardServiceImpl implements CardService {
       int expiryMonth,
       String userId,
       String bank,
-      LocalDateTime dateOfBirth,
+      LocalDate dateOfBirth,
       String scheme) {
     Card completedCard =
         this.cardFactory.generate(

@@ -1,5 +1,6 @@
 package tiktok.hackathon.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import org.springframework.stereotype.Component;
 
@@ -14,7 +15,7 @@ public class TransactionFactory {
       float lon,
       float merch_lat,
       float merch_lon,
-      LocalDateTime dateOfBirth,
+      LocalDate dateOfBirth,
       String name,
       String number) {
     // null transactionId for Mongo to generate

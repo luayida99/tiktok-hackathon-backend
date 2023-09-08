@@ -1,7 +1,6 @@
 package tiktok.hackathon.ai.services;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.Period;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,7 +75,7 @@ public class AIWrapperServiceImpl implements AIWrapperService {
     return value >= lower && value < upper;
   }
 
-  private int computeCurrentAge(LocalDateTime dateOfBirth) {
-    return Period.between(dateOfBirth.toLocalDate(), LocalDate.now()).getYears();
+  private int computeCurrentAge(LocalDate dateOfBirth) {
+    return Period.between(dateOfBirth, LocalDate.now()).getYears();
   }
 }
