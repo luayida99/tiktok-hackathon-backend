@@ -60,11 +60,9 @@ public class AIWrapperServiceImpl implements AIWrapperService {
     }
 
     // TODO: Dummy range values, update
-    return withinRange(predictedRisk, 0.00f, 0.20f)
+    return withinRange(predictedRisk, 0.00f, 0.40f)
         ? Risk.NONE
-        : withinRange(predictedRisk, 0.20f, 0.40f)
-            ? Risk.LOW
-            : withinRange(predictedRisk, 0.40f, 0.70f) ? Risk.MEDIUM : Risk.HIGH;
+        : withinRange(predictedRisk, 0.40f, 0.80f) ? Risk.LOW : Risk.HIGH;
   }
 
   private void initBusinessRules() {
