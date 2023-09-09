@@ -15,7 +15,6 @@
   <name>AppName</name>
 
   <modules>
-    <module>app</module>
     <module>card-encryption-service</module>
     <module>reports-service</module>
     <module>transaction-service</module>
