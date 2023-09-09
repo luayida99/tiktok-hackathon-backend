@@ -2,11 +2,13 @@ package tiktok.hackathon.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class TransactionDto {
   private String cardId;
   private String amount;
