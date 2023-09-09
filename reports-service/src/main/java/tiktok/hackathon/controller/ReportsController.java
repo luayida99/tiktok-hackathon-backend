@@ -7,14 +7,22 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseToken;
 import java.io.IOException;
+import java.security.Principal;
+
+import lombok.NonNull;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
+import org.springframework.messaging.simp.annotation.SendToUser;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import tiktok.hackathon.messages.ReportDto;
 import tiktok.hackathon.messages.ReportResponse;
+import tiktok.hackathon.services.NotificationService;
 
 @Controller
 public class ReportsController {
@@ -50,11 +58,5 @@ public class ReportsController {
       throw new RuntimeException(e);
     }
     return new ReportResponse(uid, report.getDescription(), report.getBank(), "test");
-  }
-
-  @MessageMapping("/sendMessage")
-  @SendTo("/topic/private")
-  public String sendMessage(@Payload String msg, @RequestParam String user) {
-    return msg + user;
   }
 }
