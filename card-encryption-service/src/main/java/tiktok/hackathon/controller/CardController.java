@@ -9,6 +9,7 @@ import tiktok.hackathon.model.Card;
 import tiktok.hackathon.model.CardView;
 import tiktok.hackathon.services.CardService;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/cards")
 public class CardController {
@@ -33,6 +34,7 @@ public class CardController {
         card.getScheme());
   }
 
+  @CrossOrigin
   @GetMapping("/{userId}")
   public List<CardView> retrieveAll(@PathVariable String userId) {
     return this.cardService.retrieveAll(userId);
