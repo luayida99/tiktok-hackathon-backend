@@ -8,11 +8,11 @@
   </parent>
 
   <groupId>tiktok.hackathon</groupId>
-  <artifactId>app-name</artifactId>
+  <artifactId>fraudnow</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>pom</packaging>
 
-  <name>AppName</name>
+  <name>FraudNow</name>
 
   <modules>
     <module>card-encryption-service</module>
